@@ -1,2 +1,2 @@
-export 'package:peliculas_seminario3raul/widgets/card_swiper.dart';
-export 'package:peliculas_seminario3raul/widgets/movie_slider.dart';
+export 'package:app_proyecto/widgets/curved_header.dart';
+export 'package:app_proyecto/widgets/custom_bottom_nav.dart';

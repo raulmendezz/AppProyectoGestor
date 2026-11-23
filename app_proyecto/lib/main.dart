@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'screens/screens.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,16 +11,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pelicula Rulo',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
-      routes: {
-        'home':    ( _ ) => HomeScreen(),
-        'details': ( _ ) => DetailsScreen(),
-      },
-      theme: ThemeData.light().copyWith(
-        appBarTheme: const AppBarTheme(color: Colors.indigo),
+      title: 'IES Marcos Zaragoza',
+      theme: ThemeData(
+        primaryColor: const Color(0xFF1C3A70),
+        scaffoldBackgroundColor: const Color(0xFFF8F9FA),
+        fontFamily: 'Roboto',
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF1C3A70),
+            foregroundColor: Colors.white,
+            minimumSize: const Size(double.infinity, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
       ),
+      home: const LoginScreen(),
     );
   }
 }
