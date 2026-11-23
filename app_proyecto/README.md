@@ -1,4 +1,4 @@
-# app_proyecto
+# peliculas_seminario3raul
 
 A new Flutter project.
 
