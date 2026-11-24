@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
+import 'package:app_proyecto/providers/auth_provider.dart';
+import 'package:app_proyecto/providers/bloqueos_provider.dart';
+import 'package:app_proyecto/providers/solicitudes_provider.dart';
 import 'package:app_proyecto/providers/tema_provider.dart';
 import 'package:app_proyecto/theme/app_tema.dart';
 import 'package:app_proyecto/screens/screens.dart';
@@ -9,9 +12,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Carga los nombres de meses y días en español para intl.
   await initializeDateFormatting('es');
+  // Providers globales: se pueden usar desde cualquier pantalla.
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => TemaProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TemaProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => BloqueosProvider()),
+        ChangeNotifierProvider(create: (_) => SolicitudesProvider()),
+      ],
       child: const MyApp(),
     ),
   );
