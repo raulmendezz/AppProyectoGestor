@@ -3,7 +3,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:app_proyecto/providers/tema_provider.dart';
 import 'package:app_proyecto/theme/app_tema.dart';
-import 'screens/screens.dart';
+import 'package:app_proyecto/screens/screens.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
