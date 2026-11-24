@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:app_proyecto/providers/sesion_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:app_proyecto/providers/auth_provider.dart';
 import 'package:app_proyecto/widgets/widgets.dart';
 
 class PerfilScreen extends StatelessWidget {
@@ -7,7 +8,9 @@ class PerfilScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usuario = sesionProvider.usuarioActual;
+    final usuario = context.watch<AuthProvider>().usuario;
+    // Al cerrar sesión, durante la animación de salida ya no hay usuario.
+    if (usuario == null) return const Scaffold();
     final profesor = usuario.profesor;
 
     return Scaffold(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:app_proyecto/models/models.dart';
+import 'package:app_proyecto/providers/auth_provider.dart';
 import 'package:app_proyecto/providers/menu_provider.dart';
-import 'package:app_proyecto/providers/sesion_provider.dart';
+import 'package:app_proyecto/providers/solicitudes_provider.dart';
 import 'package:app_proyecto/screens/screens.dart';
 import 'package:app_proyecto/widgets/widgets.dart';
 
@@ -9,8 +12,14 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final menuItems = menuProvider.opciones;
-    final usuario = sesionProvider.usuarioActual;
+    final usuario = context.watch<AuthProvider>().usuario;
+    // Al cerrar sesión, durante la animación de salida ya no hay usuario.
+    if (usuario == null) return const Scaffold();
+
+    // El admin no tiene profesor, así que no puede pedir días: se le oculta "Permisos".
+    final menuItems = menuProvider.opciones
+        .where((opcion) => !(usuario.rol == RolUsuario.admin && opcion.titulo == 'Permisos'))
+        .toList();
 
     return Scaffold(
       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 0),
@@ -106,6 +115,9 @@ class MenuScreen extends StatelessWidget {
             padding: const EdgeInsets.all(24.0),
             child: OutlinedButton(
               onPressed: () {
+                // Borra el token y las solicitudes para que el siguiente usuario no las vea.
+                context.read<AuthProvider>().cerrarSesion();
+                context.read<SolicitudesProvider>().limpiar();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
