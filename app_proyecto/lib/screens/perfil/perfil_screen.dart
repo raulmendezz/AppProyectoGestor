@@ -8,6 +8,7 @@ class PerfilScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final usuario = sesionProvider.usuarioActual;
+    final profesor = usuario.profesor;
 
     return Scaffold(
       body: Column(
@@ -43,7 +44,7 @@ class PerfilScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(usuario.nombre, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
-                  Text(usuario.rol, style: const TextStyle(color: Colors.white70, fontSize: 14)),
+                  Text(usuario.rol.texto, style: const TextStyle(color: Colors.white70, fontSize: 14)),
                 ],
               ),
             ),
@@ -62,22 +63,29 @@ class PerfilScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    // Si es admin sin profesor, se muestra un guion.
                     ListTile(
-                      leading: Icon(Icons.email_outlined, color: Theme.of(context).colorScheme.primary),
-                      title: const Text('Correo', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      subtitle: Text(usuario.correo, style: const TextStyle(fontSize: 16)),
+                      leading: Icon(Icons.apartment_outlined, color: Theme.of(context).colorScheme.primary),
+                      title: const Text('Departamento', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      subtitle: Text(profesor?.departamento ?? '-', style: const TextStyle(fontSize: 16)),
+                    ),
+                    const Divider(height: 1, indent: 16, endIndent: 16),
+                    ListTile(
+                      leading: Icon(Icons.school_outlined, color: Theme.of(context).colorScheme.primary),
+                      title: const Text('Especialidad', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      subtitle: Text(profesor?.especialidad ?? '-', style: const TextStyle(fontSize: 16)),
                     ),
                     const Divider(height: 1, indent: 16, endIndent: 16),
                     ListTile(
                       leading: Icon(Icons.phone_outlined, color: Theme.of(context).colorScheme.primary),
                       title: const Text('Teléfono', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      subtitle: Text(usuario.telefono, style: const TextStyle(fontSize: 16)),
+                      subtitle: Text(profesor?.telefono ?? '-', style: const TextStyle(fontSize: 16)),
                     ),
                     const Divider(height: 1, indent: 16, endIndent: 16),
                     ListTile(
                       leading: Icon(Icons.person_outline, color: Theme.of(context).colorScheme.primary),
                       title: const Text('Rol', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      subtitle: Text(usuario.rol, style: const TextStyle(fontSize: 16)),
+                      subtitle: Text(usuario.rol.texto, style: const TextStyle(fontSize: 16)),
                     ),
                   ],
                 ),

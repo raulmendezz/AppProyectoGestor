@@ -1,12 +1,19 @@
 import 'package:app_proyecto/models/models.dart';
 
 /// Usuario que ha iniciado sesión. Es el único usuario accesible en la app.
+/// De momento son datos de prueba; en la Fase 5 vendrán de /api/auth/me.
 class _SesionProvider {
-  Usuario usuarioActual = const Usuario(
-    nombre: 'Ana García López',
-    rol: 'Profesora',
-    correo: 'ana.garcia@centro.es',
-    telefono: '600 111 222',
+  Usuario usuarioActual = Usuario(
+    username: 'user',
+    rol: RolUsuario.profesor,
+    profesor: Profesor(
+      id: 1,
+      nombre: 'Raul',
+      apellidos: 'Martinez Lopez',
+      departamento: 'Tecnologia',
+      especialidad: 'Informatica',
+      telefono: '600123456',
+    ),
   );
 }
 
