@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:app_proyecto/providers/auth_provider.dart';
@@ -39,6 +40,10 @@ class MyApp extends StatelessWidget {
       theme: AppTema.claro,
       darkTheme: AppTema.oscuro,
       themeMode: tema.modo,
+      // Textos de Flutter (selector de fecha, botones Aceptar/Cancelar...) en español.
+      locale: const Locale('es'),
+      supportedLocales: const [Locale('es')],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       home: const SplashScreen(),
     );
   }

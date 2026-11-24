@@ -19,6 +19,7 @@ export 'package:app_proyecto/widgets/calendario/panel.dart';
 // Solicitudes de asuntos propios
 export 'package:app_proyecto/widgets/solicitudes/chip_estado.dart';
 export 'package:app_proyecto/widgets/solicitudes/solicitud_card.dart';
+export 'package:app_proyecto/widgets/solicitudes/pedir_dia_sheet.dart';
 
 // Pantalla de carga
 export 'package:app_proyecto/widgets/splash/cargando.dart';

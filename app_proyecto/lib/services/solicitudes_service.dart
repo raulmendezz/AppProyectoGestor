@@ -25,4 +25,13 @@ class SolicitudesService {
     ));
     return SolicitudAsuntoPropio.fromJson(leerRespuesta(respuesta));
   }
+
+  // DELETE /api/moscosos-solicitudes/{id}. El profesor solo puede borrar las pendientes.
+  static Future<void> eliminarSolicitud(int id) async {
+    final respuesta = await enviar(http.delete(
+      ApiConfig.url('${ApiConfig.solicitudes}/$id'),
+      headers: cabeceras(),
+    ));
+    leerRespuesta(respuesta); // Solo para lanzar el error si la API lo rechaza.
+  }
 }

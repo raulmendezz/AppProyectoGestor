@@ -51,6 +51,19 @@ class SolicitudesProvider extends ChangeNotifier {
     }
   }
 
+  // Anula (borra) una solicitud pendiente. Devuelve null si fue bien o el mensaje de error.
+  Future<String?> anular(SolicitudAsuntoPropio solicitud) async {
+    try {
+      await SolicitudesService.eliminarSolicitud(solicitud.id!);
+      _solicitudes.remove(solicitud);
+      if (_solicitudes.isEmpty) _estado = EstadoCarga.vacio;
+      notifyListeners();
+      return null;
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
   List<SolicitudAsuntoPropio> solicitudesDelDia(DateTime dia) {
     return _solicitudes.where((s) => mismoDia(s.fecha, dia)).toList();
   }

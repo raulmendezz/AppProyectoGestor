@@ -7,8 +7,10 @@ import 'package:app_proyecto/widgets/solicitudes/chip_estado.dart';
 // Tarjeta de una solicitud: fecha a la izquierda, datos en el centro y estado a la derecha.
 class SolicitudCard extends StatelessWidget {
   final SolicitudAsuntoPropio solicitud;
+  // Si se pasa, aparece el botón de anular (solo para solicitudes pendientes).
+  final VoidCallback? onAnular;
 
-  const SolicitudCard({super.key, required this.solicitud});
+  const SolicitudCard({super.key, required this.solicitud, this.onAnular});
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,12 @@ class SolicitudCard extends StatelessWidget {
             ),
           ),
           ChipEstado(estado: solicitud.estado),
+          if (onAnular != null)
+            IconButton(
+              icon: const Icon(Icons.close, color: Colors.red),
+              tooltip: 'Anular',
+              onPressed: onAnular,
+            ),
         ],
       ),
     );
