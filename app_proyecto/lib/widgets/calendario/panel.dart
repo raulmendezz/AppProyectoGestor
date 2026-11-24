@@ -39,7 +39,7 @@ class CalendarioPanel extends StatelessWidget {
                 CalendarioDiasSemana(),
                 SizedBox(height: 8),
                 CalendarioCuadricula(),
-                CalendarioAsa(),
+                CalendarioBotonPlegar(),
               ],
             ),
           ),

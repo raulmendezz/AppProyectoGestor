@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:app_proyecto/providers/calendario_provider.dart';
 
 /// Barrita inferior del panel: indica que se puede arrastrar y al tocarla pliega/despliega.
-class CalendarioAsa extends StatelessWidget {
-  const CalendarioAsa({super.key});
+class CalendarioBotonPlegar extends StatelessWidget {
+  const CalendarioBotonPlegar({super.key});
 
   @override
   Widget build(BuildContext context) {
