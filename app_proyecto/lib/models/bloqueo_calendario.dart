@@ -1,13 +1,13 @@
 // Periodo del calendario en el que no se pueden pedir asuntos propios
 // (vacaciones, exámenes...). Viene de GET /api/bloqueos-calendario.
 class BloqueoCalendario {
-  final int id;
+  final int? id; // null cuando el bloqueo es nuevo y aún no se ha guardado.
   final DateTime fechaInicio;
   final DateTime fechaFin;
   final String tipo;
 
   BloqueoCalendario({
-    required this.id,
+    this.id,
     required this.fechaInicio,
     required this.fechaFin,
     required this.tipo,
@@ -25,7 +25,7 @@ class BloqueoCalendario {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       // La API espera solo la fecha (yyyy-MM-dd), sin la hora.
       'fechaInicio': fechaInicio.toIso8601String().substring(0, 10),
       'fechaFin': fechaFin.toIso8601String().substring(0, 10),

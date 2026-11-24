@@ -12,6 +12,7 @@ export 'package:app_proyecto/widgets/calendario/cuadricula.dart';
 export 'package:app_proyecto/widgets/calendario/dia_celda.dart';
 export 'package:app_proyecto/widgets/calendario/dias_semana.dart';
 export 'package:app_proyecto/widgets/calendario/bloqueo_card.dart';
+export 'package:app_proyecto/widgets/calendario/bloqueo_form_sheet.dart';
 export 'package:app_proyecto/widgets/calendario/eventos_dia_lista.dart';
 export 'package:app_proyecto/widgets/calendario/navegacion.dart';
 export 'package:app_proyecto/widgets/calendario/panel.dart';
