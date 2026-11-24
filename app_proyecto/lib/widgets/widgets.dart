@@ -16,6 +16,10 @@ export 'package:app_proyecto/widgets/calendario/eventos_dia_lista.dart';
 export 'package:app_proyecto/widgets/calendario/navegacion.dart';
 export 'package:app_proyecto/widgets/calendario/panel.dart';
 
+// Solicitudes de asuntos propios
+export 'package:app_proyecto/widgets/solicitudes/chip_estado.dart';
+export 'package:app_proyecto/widgets/solicitudes/solicitud_card.dart';
+
 // Pantalla de carga
 export 'package:app_proyecto/widgets/splash/cargando.dart';
 export 'package:app_proyecto/widgets/splash/logo.dart';

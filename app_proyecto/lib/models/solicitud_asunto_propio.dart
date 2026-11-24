@@ -1,13 +1,15 @@
 import 'package:app_proyecto/models/profesor.dart';
 
-// Estado de una solicitud. "valorApi" es el texto exacto que usa la API.
+// Estado de una solicitud. "valorApi" es el texto exacto que usa la API
+// y "texto" el que se enseña en pantalla.
 enum EstadoSolicitud {
-  pendiente('PENDIENTE'),
-  aprobada('APROBADA'),
-  rechazada('RECHAZADA');
+  pendiente('PENDIENTE', 'Pendiente'),
+  aprobada('APROBADA', 'Aprobada'),
+  rechazada('RECHAZADA', 'Rechazada');
 
-  const EstadoSolicitud(this.valorApi);
+  const EstadoSolicitud(this.valorApi, this.texto);
   final String valorApi;
+  final String texto;
 
   static EstadoSolicitud desdeApi(String valor) {
     return EstadoSolicitud.values.firstWhere((e) => e.valorApi == valor);
@@ -16,11 +18,12 @@ enum EstadoSolicitud {
 
 // Si el día pedido es lectivo o no lectivo.
 enum TipoLectivo {
-  lectivo('LECTIVO'),
-  noLectivo('NO_LECTIVO');
+  lectivo('LECTIVO', 'Lectivo'),
+  noLectivo('NO_LECTIVO', 'No lectivo');
 
-  const TipoLectivo(this.valorApi);
+  const TipoLectivo(this.valorApi, this.texto);
   final String valorApi;
+  final String texto;
 
   static TipoLectivo desdeApi(String valor) {
     return TipoLectivo.values.firstWhere((e) => e.valorApi == valor);

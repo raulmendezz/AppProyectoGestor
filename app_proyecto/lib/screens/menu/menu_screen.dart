@@ -70,6 +70,7 @@ class MenuScreen extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     final Widget? destino = switch (item.titulo) {
+                      'Permisos' => const SolicitudesScreen(),
                       'Calendario' => const CalendarioScreen(),
                       'Mi perfil' => const PerfilScreen(),
                       _ => null,
