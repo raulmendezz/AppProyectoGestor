@@ -1,6 +1,7 @@
 import 'package:app_proyecto/models/models.dart';
 
-class _UsuariosProvider {
+/// Usuario que ha iniciado sesión. Es el único usuario accesible en la app.
+class _SesionProvider {
   Usuario usuarioActual = const Usuario(
     nombre: 'Ana García López',
     rol: 'Profesora',
@@ -9,4 +10,4 @@ class _UsuariosProvider {
   );
 }
 
-final usuariosProvider = _UsuariosProvider();
+final sesionProvider = _SesionProvider();

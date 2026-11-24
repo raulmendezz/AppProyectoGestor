@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:app_proyecto/providers/usuarios_provider.dart';
+import 'package:app_proyecto/providers/sesion_provider.dart';
 import 'package:app_proyecto/widgets/widgets.dart';
 
-class DetallesUsuariosScreen extends StatelessWidget {
-  const DetallesUsuariosScreen({super.key});
+class PerfilScreen extends StatelessWidget {
+  const PerfilScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final usuario = usuariosProvider.usuarioActual;
+    final usuario = sesionProvider.usuarioActual;
 
     return Scaffold(
       body: Column(
@@ -26,7 +26,7 @@ class DetallesUsuariosScreen extends StatelessWidget {
                       const Expanded(
                         child: Center(
                           child: Text(
-                            'Detalle de usuario',
+                            'Mi perfil',
                             style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -53,7 +53,7 @@ class DetallesUsuariosScreen extends StatelessWidget {
               padding: const EdgeInsets.all(24.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, 4))
@@ -63,21 +63,21 @@ class DetallesUsuariosScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ListTile(
-                      leading: const Icon(Icons.email_outlined, color: Color(0xFF1C3A70)),
+                      leading: Icon(Icons.email_outlined, color: Theme.of(context).colorScheme.primary),
                       title: const Text('Correo', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      subtitle: Text(usuario.correo, style: const TextStyle(fontSize: 16, color: Colors.black)),
+                      subtitle: Text(usuario.correo, style: const TextStyle(fontSize: 16)),
                     ),
                     const Divider(height: 1, indent: 16, endIndent: 16),
                     ListTile(
-                      leading: const Icon(Icons.phone_outlined, color: Color(0xFF1C3A70)),
+                      leading: Icon(Icons.phone_outlined, color: Theme.of(context).colorScheme.primary),
                       title: const Text('Teléfono', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      subtitle: Text(usuario.telefono, style: const TextStyle(fontSize: 16, color: Colors.black)),
+                      subtitle: Text(usuario.telefono, style: const TextStyle(fontSize: 16)),
                     ),
                     const Divider(height: 1, indent: 16, endIndent: 16),
                     ListTile(
-                      leading: const Icon(Icons.person_outline, color: Color(0xFF1C3A70)),
+                      leading: Icon(Icons.person_outline, color: Theme.of(context).colorScheme.primary),
                       title: const Text('Rol', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      subtitle: Text(usuario.rol, style: const TextStyle(fontSize: 16, color: Colors.black)),
+                      subtitle: Text(usuario.rol, style: const TextStyle(fontSize: 16)),
                     ),
                   ],
                 ),

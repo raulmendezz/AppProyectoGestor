@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Evento {
+  final DateTime fecha;
   final String hora;
   final String titulo;
   final String estado;
@@ -8,6 +9,7 @@ class Evento {
   final Color color;
 
   const Evento({
+    required this.fecha,
     required this.hora,
     required this.titulo,
     required this.estado,

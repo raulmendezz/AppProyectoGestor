@@ -1,35 +1,66 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:app_proyecto/screens/screens.dart';
+import 'package:app_proyecto/theme/app_tema.dart';
+import 'package:app_proyecto/widgets/widgets.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  final Duration duracion;
+
+  const SplashScreen({super.key, this.duracion = const Duration(seconds: 3)});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  Timer? _temporizador;
+
+  @override
+  void initState() {
+    super.initState();
+    _temporizador = Timer(widget.duracion, _irAlLogin);
+  }
+
+  void _irAlLogin() {
+    if (!mounted) return;
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (_, _, _) => const LoginScreen(),
+        transitionsBuilder: (_, animacion, _, child) => FadeTransition(opacity: animacion, child: child),
+        transitionDuration: const Duration(milliseconds: 450),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _temporizador?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1C3A70),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              clipBehavior: Clip.hardEdge, // Para que la imagen respete los bordes redondeados
-              child: Image.asset(
-                'assets/images/logo.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(height: 24),
-            const Text('IES Marcos Zaragoza', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            const Text('Días de libre disposición', style: TextStyle(color: Colors.white70)),
-            const SizedBox(height: 80),
-            const CircularProgressIndicator(color: Colors.amber),
-          ],
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [AppColores.splashArriba, AppColores.splashAbajo],
+          ),
+        ),
+        child: const SafeArea(
+          child: Column(
+            children: [
+              Spacer(flex: 3),
+              SplashLogo(),
+              Spacer(flex: 2),
+              SplashCargando(),
+              SizedBox(height: 56),
+            ],
+          ),
         ),
       ),
     );

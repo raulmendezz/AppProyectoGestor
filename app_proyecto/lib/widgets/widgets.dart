@@ -1,2 +1,14 @@
+export 'package:app_proyecto/widgets/boton_modo_noche.dart';
+export 'package:app_proyecto/widgets/calendario_asa.dart';
+export 'package:app_proyecto/widgets/calendario_cabecera.dart';
+export 'package:app_proyecto/widgets/calendario_cuadricula.dart';
+export 'package:app_proyecto/widgets/calendario_dia_celda.dart';
+export 'package:app_proyecto/widgets/calendario_dias_semana.dart';
+export 'package:app_proyecto/widgets/calendario_navegacion.dart';
+export 'package:app_proyecto/widgets/calendario_panel.dart';
 export 'package:app_proyecto/widgets/curved_header.dart';
 export 'package:app_proyecto/widgets/custom_bottom_nav.dart';
+export 'package:app_proyecto/widgets/evento_card.dart';
+export 'package:app_proyecto/widgets/eventos_dia_lista.dart';
+export 'package:app_proyecto/widgets/splash_cargando.dart';
+export 'package:app_proyecto/widgets/splash_logo.dart';
