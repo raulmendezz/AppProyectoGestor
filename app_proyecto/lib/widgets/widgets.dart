@@ -20,6 +20,7 @@ export 'package:app_proyecto/widgets/calendario/panel.dart';
 export 'package:app_proyecto/widgets/solicitudes/chip_estado.dart';
 export 'package:app_proyecto/widgets/solicitudes/solicitud_card.dart';
 export 'package:app_proyecto/widgets/solicitudes/pedir_dia_sheet.dart';
+export 'package:app_proyecto/widgets/solicitudes/solicitud_admin_card.dart';
 
 // Pantalla de carga
 export 'package:app_proyecto/widgets/splash/cargando.dart';
