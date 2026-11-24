@@ -27,17 +27,14 @@ class BloqueosProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Devuelve el bloqueo que incluye ese día, o null si el día está libre.
-  BloqueoCalendario? bloqueoDelDia(DateTime dia) {
+  // Todos los bloqueos que incluyen ese día (puede haber varios a la vez).
+  List<BloqueoCalendario> bloqueosDelDia(DateTime dia) {
     final fecha = soloFecha(dia);
-    for (final bloqueo in _bloqueos) {
-      // El día cuenta si está entre el inicio y el fin, ambos incluidos.
-      if (!fecha.isBefore(bloqueo.fechaInicio) && !fecha.isAfter(bloqueo.fechaFin)) {
-        return bloqueo;
-      }
-    }
-    return null;
+    // El día cuenta si está entre el inicio y el fin, ambos incluidos.
+    return _bloqueos
+        .where((b) => !fecha.isBefore(b.fechaInicio) && !fecha.isAfter(b.fechaFin))
+        .toList();
   }
 
-  bool estaBloqueado(DateTime dia) => bloqueoDelDia(dia) != null;
+  bool estaBloqueado(DateTime dia) => bloqueosDelDia(dia).isNotEmpty;
 }
