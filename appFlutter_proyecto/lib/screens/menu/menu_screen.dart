@@ -16,11 +16,11 @@ class MenuScreen extends StatelessWidget {
     // Al cerrar sesión, durante la animación de salida ya no hay usuario.
     if (usuario == null) return const Scaffold();
 
-    // "Permisos" (pedir días) es solo del profesor y "Solicitudes" (aprobar) solo del admin.
+    // "Permisos" (pedir días) solo para el profesor: el admin no tiene profesor enlazado,
+    // así que en la app solo ve el calendario y su perfil.
     final esAdmin = usuario.rol == RolUsuario.admin;
     final menuItems = menuProvider.opciones.where((opcion) {
       if (opcion.titulo == 'Permisos') return !esAdmin;
-      if (opcion.titulo == 'Solicitudes') return esAdmin;
       return true;
     }).toList();
 
@@ -83,7 +83,6 @@ class MenuScreen extends StatelessWidget {
                   onTap: () {
                     final Widget? destino = switch (item.titulo) {
                       'Permisos' => const SolicitudesScreen(),
-                      'Solicitudes' => const GestionSolicitudesScreen(),
                       'Calendario' => const CalendarioScreen(),
                       'Mi perfil' => const PerfilScreen(),
                       _ => null,

@@ -10,10 +10,7 @@ import 'package:app_proyecto/widgets/widgets.dart';
 
 /// Lo que hay el día seleccionado: bloqueos y (para el profesor) su solicitud.
 class EventosDiaLista extends StatelessWidget {
-  // Si se pasa (admin), al tocar un bloqueo se llama a esta función.
-  final ValueChanged<BloqueoCalendario>? onTocarBloqueo;
-
-  const EventosDiaLista({super.key, this.onTocarBloqueo});
+  const EventosDiaLista({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +22,7 @@ class EventosDiaLista extends StatelessWidget {
     final vacio = bloqueos.isEmpty && solicitudes.isEmpty;
 
     return ListView(
-      // Margen inferior para que el botón flotante del admin no tape la última tarjeta.
-      padding: const EdgeInsets.only(top: 16, left: 24, right: 24, bottom: 88),
+      padding: const EdgeInsets.all(24),
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 16),
@@ -46,10 +42,7 @@ class EventosDiaLista extends StatelessWidget {
               ],
             ),
           ),
-        ...bloqueos.map((bloqueo) => BloqueoCard(
-              bloqueo: bloqueo,
-              onTap: onTocarBloqueo == null ? null : () => onTocarBloqueo!(bloqueo),
-            )),
+        ...bloqueos.map((bloqueo) => BloqueoCard(bloqueo: bloqueo)),
         ...solicitudes.map((solicitud) => SolicitudCard(solicitud: solicitud)),
       ],
     );

@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:app_proyecto/models/models.dart';
 
-// Tarjeta de un periodo bloqueado. Si se pasa onTap (admin), se puede tocar para editarlo o borrarlo.
+// Tarjeta de un periodo bloqueado.
 class BloqueoCard extends StatelessWidget {
   final BloqueoCalendario bloqueo;
-  final VoidCallback? onTap;
 
-  const BloqueoCard({super.key, required this.bloqueo, this.onTap});
+  const BloqueoCard({super.key, required this.bloqueo});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +23,9 @@ class BloqueoCard extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        onTap: onTap,
         leading: const Icon(Icons.block, color: Colors.redAccent),
         title: Text(bloqueo.tipo, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text('Del ${formato.format(bloqueo.fechaInicio)} al ${formato.format(bloqueo.fechaFin)}'),
-        trailing: onTap != null ? const Icon(Icons.more_vert) : null,
       ),
     );
   }

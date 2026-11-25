@@ -64,35 +64,6 @@ class SolicitudesProvider extends ChangeNotifier {
     }
   }
 
-  // Admin: aprueba o rechaza. Devuelve null si fue bien o el mensaje de error.
-  Future<String?> resolver(SolicitudAsuntoPropio solicitud, EstadoSolicitud estado) async {
-    try {
-      final actualizada = await SolicitudesService.cambiarEstado(solicitud.id!, estado);
-      _reemplazar(solicitud, actualizada);
-      return null;
-    } catch (e) {
-      return e.toString();
-    }
-  }
-
-  // Admin: cambia Lectivo / No lectivo. Devuelve null si fue bien o el mensaje de error.
-  Future<String?> cambiarTipoLectivo(SolicitudAsuntoPropio solicitud, TipoLectivo tipo) async {
-    try {
-      final actualizada = await SolicitudesService.cambiarTipoLectivo(solicitud, tipo);
-      _reemplazar(solicitud, actualizada);
-      return null;
-    } catch (e) {
-      return e.toString();
-    }
-  }
-
-  // Cambia en la lista la solicitud vieja por la que ha devuelto la API.
-  void _reemplazar(SolicitudAsuntoPropio vieja, SolicitudAsuntoPropio nueva) {
-    final posicion = _solicitudes.indexOf(vieja);
-    if (posicion != -1) _solicitudes[posicion] = nueva;
-    notifyListeners();
-  }
-
   List<SolicitudAsuntoPropio> solicitudesDelDia(DateTime dia) {
     return _solicitudes.where((s) => mismoDia(s.fecha, dia)).toList();
   }
