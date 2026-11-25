@@ -1,0 +1,43 @@
+<UserControl x:Class="AppEscritorioGestor.SolicitudAdminTarjeta"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Background="White" CornerRadius="12" Padding="18" Margin="0,0,0,12" Effect="{StaticResource SombraTarjeta}">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="{Binding ProfesorTexto}" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock Text="{Binding DepartamentoTexto}" FontSize="12" Foreground="{StaticResource TextoSecundarioPincel}" Margin="0,2,0,0"/>
+                </StackPanel>
+                <Border Grid.Column="1" Background="{Binding EstadoFondoPincel}" CornerRadius="12" Padding="12,4" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding EstadoTexto}" Foreground="{Binding EstadoPincel}" FontWeight="Bold" FontSize="12"/>
+                </Border>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource AzulPincel}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding FechaLargaTexto}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Grid Margin="0,12,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="LectivoBoton" Grid.Column="0" Height="38" Content="Lectivo" Click="TipoBoton_Click"/>
+                <Button x:Name="NoLectivoBoton" Grid.Column="2" Height="38" Content="No lectivo" Click="TipoBoton_Click"/>
+            </Grid>
+            <Grid x:Name="ResolverGrid" Margin="0,12,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="RechazarBoton" Grid.Column="0" Style="{StaticResource BotonSecundarioEstilo}" Foreground="{StaticResource ErrorPincel}" BorderBrush="{StaticResource ErrorPincel}" Height="42" Content="Rechazar" Click="RechazarBoton_Click"/>
+                <Button x:Name="AprobarBoton" Grid.Column="2" Style="{StaticResource BotonPrimarioEstilo}" Background="#4CAF50" Height="42" Content="Aprobar" Click="AprobarBoton_Click"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>

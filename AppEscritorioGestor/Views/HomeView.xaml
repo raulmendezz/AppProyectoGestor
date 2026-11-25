@@ -1,0 +1,75 @@
+<UserControl x:Class="AppEscritorioGestor.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CabeceraEstilo}" Height="180">
+            <Grid MaxWidth="760" Margin="24,0" VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock Text="Bienvenido/a" Foreground="#B3FFFFFF" FontSize="14"/>
+                    <TextBlock x:Name="SaludoTextBlock" Foreground="White" FontSize="26" FontWeight="Bold" Margin="0,2,0,4"/>
+                    <TextBlock Text="¿Qué quieres hacer hoy?" Foreground="#B3FFFFFF" FontSize="14"/>
+                </StackPanel>
+                <Button x:Name="AvatarBoton" Style="{StaticResource BotonAvatarEstilo}" HorizontalAlignment="Right" VerticalAlignment="Top" Tag="Perfil" ToolTip="Mi perfil" Click="TarjetaBoton_Click"/>
+            </Grid>
+        </Border>
+
+        <UniformGrid Grid.Row="1" Columns="2" MaxWidth="640" Margin="16,20,16,0" VerticalAlignment="Top">
+            <Button x:Name="PermisosBoton" Style="{StaticResource BotonTarjetaEstilo}" Height="150" Tag="Permisos" Click="TarjetaBoton_Click">
+                <StackPanel>
+                    <Border Style="{StaticResource InsigniaIconoEstilo}" Width="64" Height="64" CornerRadius="18">
+                        <Grid>
+                            <Border CornerRadius="17" Background="{StaticResource InsigniaBrilloPincel}"/>
+                            <TextBlock Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" FontSize="30" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource SombraGlifo}"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock x:Name="PermisosTituloTextBlock" Text="Permisos" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+                    <TextBlock x:Name="PermisosSubtituloTextBlock" Text="Solicitudes y días" FontSize="12" Foreground="{StaticResource TextoSecundarioPincel}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="CalendarioBoton" Style="{StaticResource BotonTarjetaEstilo}" Height="150" Tag="Calendario" Click="TarjetaBoton_Click">
+                <StackPanel>
+                    <Border Style="{StaticResource InsigniaIconoEstilo}" Width="64" Height="64" CornerRadius="18">
+                        <Grid>
+                            <Border CornerRadius="17" Background="{StaticResource InsigniaBrilloPincel}"/>
+                            <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="30" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource SombraGlifo}"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Text="Calendario" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+                    <TextBlock Text="Días y bloqueos" FontSize="12" Foreground="{StaticResource TextoSecundarioPincel}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="MiPerfilBoton" Style="{StaticResource BotonTarjetaEstilo}" Height="150" Tag="Perfil" Click="TarjetaBoton_Click">
+                <StackPanel>
+                    <Border Style="{StaticResource InsigniaIconoEstilo}" Width="64" Height="64" CornerRadius="18">
+                        <Grid>
+                            <Border CornerRadius="17" Background="{StaticResource InsigniaBrilloPincel}"/>
+                            <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="30" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource SombraGlifo}"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Text="Mi perfil" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+                    <TextBlock Text="Tus datos" FontSize="12" Foreground="{StaticResource TextoSecundarioPincel}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="AjustesBoton" Style="{StaticResource BotonTarjetaEstilo}" Height="150" Tag="Ajustes" Click="TarjetaBoton_Click">
+                <StackPanel>
+                    <Border Style="{StaticResource InsigniaIconoEstilo}" Width="64" Height="64" CornerRadius="18">
+                        <Grid>
+                            <Border CornerRadius="17" Background="{StaticResource InsigniaBrilloPincel}"/>
+                            <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="30" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource SombraGlifo}"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Text="Ajustes" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+                    <TextBlock Text="Preferencias" FontSize="12" Foreground="{StaticResource TextoSecundarioPincel}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Button>
+        </UniformGrid>
+
+        <Button x:Name="SalirBoton" Grid.Row="2" Style="{StaticResource BotonSecundarioEstilo}" MaxWidth="608" Margin="24,0,24,24" Content="Cerrar sesión" Click="SalirBoton_Click"/>
+    </Grid>
+</UserControl>

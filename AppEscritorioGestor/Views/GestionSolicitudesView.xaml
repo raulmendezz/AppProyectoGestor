@@ -1,0 +1,48 @@
+<UserControl x:Class="AppEscritorioGestor.GestionSolicitudesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CabeceraEstilo}" Height="150">
+            <Grid MaxWidth="760" Margin="24,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="48"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="VolverInicioBoton" Style="{StaticResource BotonCabeceraEstilo}" Content="&#xE72B;" ToolTip="Volver al inicio" Click="VolverInicioBoton_Click"/>
+                    <TextBlock Grid.Column="1" Text="Solicitudes" Foreground="White" FontSize="19" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="ActualizarBoton" Grid.Column="2" Style="{StaticResource BotonCabeceraEstilo}" Content="&#xE72C;" ToolTip="Actualizar" Click="ActualizarBoton_Click"/>
+                </Grid>
+                <UniformGrid Grid.Row="1" Rows="1" Margin="0,10,0,18" VerticalAlignment="Bottom">
+                    <Button x:Name="PendientesBoton" Height="40" Margin="0,0,6,0" Click="PestanaBoton_Click"/>
+                    <Button x:Name="ResueltasBoton" Height="40" Margin="6,0,0,0" Click="PestanaBoton_Click"/>
+                </UniformGrid>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" MaxWidth="760">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="24,24,24,24">
+                    <Border x:Name="MensajeBorder" CornerRadius="8" Padding="14,10" Margin="0,0,0,16" Visibility="Collapsed">
+                        <TextBlock x:Name="MensajeTextBlock" FontSize="14" TextWrapping="Wrap"/>
+                    </Border>
+                    <StackPanel x:Name="ListaPanel"/>
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel x:Name="EstadoPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                <TextBlock x:Name="EstadoTextBlock" FontSize="15" TextAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource TextoSecundarioPincel}"/>
+                <Button x:Name="ReintentarBoton" Style="{StaticResource BotonPrimarioEstilo}" Content="Reintentar" Width="160" Margin="0,14,0,0" Visibility="Collapsed" Click="ActualizarBoton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

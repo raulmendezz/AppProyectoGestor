@@ -1,0 +1,32 @@
+<UserControl x:Class="AppEscritorioGestor.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CabeceraEstilo}" Height="260">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Style="{StaticResource InsigniaIconoEstilo}" Width="84" Height="84" CornerRadius="24" Background="{StaticResource DoradoPincel}" BorderBrush="#99FFFFFF">
+                    <TextBlock Text="M&amp;Z" Foreground="{StaticResource AzulPincel}" FontSize="28" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="IES Marcos Zaragoza" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,18,0,0"/>
+                <TextBlock Text="Gestión de permisos por asuntos particulares" Foreground="#B3FFFFFF" FontSize="14" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource TarjetaEstilo}" MaxWidth="420" Margin="24,28,24,0" Padding="28,24" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Iniciar sesión" FontSize="20" FontWeight="Bold" Margin="0,0,0,16"/>
+                <TextBlock Text="Usuario" Style="{StaticResource EtiquetaEstilo}"/>
+                <TextBox x:Name="UsuarioTextBox" Style="{StaticResource EntradaTextBoxEstilo}" TabIndex="0"/>
+                <TextBlock Text="Contraseña" Style="{StaticResource EtiquetaEstilo}" Margin="0,14,0,4"/>
+                <PasswordBox x:Name="ContrasenaPasswordBox" Style="{StaticResource EntradaPasswordBoxEstilo}" TabIndex="1" KeyDown="ContrasenaPasswordBox_KeyDown"/>
+                <TextBlock x:Name="ErrorTextBlock" Foreground="{StaticResource ErrorPincel}" TextWrapping="Wrap" Margin="0,12,0,0" Visibility="Collapsed"/>
+                <Button x:Name="EntrarBoton" Style="{StaticResource BotonPrimarioEstilo}" Content="Entrar" Margin="0,20,0,0" TabIndex="2" Click="EntrarBoton_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
