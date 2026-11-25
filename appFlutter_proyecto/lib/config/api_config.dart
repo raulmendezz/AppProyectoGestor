@@ -1,8 +1,11 @@
 // Configuración de la API. Si cambia la dirección del servidor, solo se toca aquí.
 class ApiConfig {
-  // Con el móvil por USB y "adb reverse tcp:8080 tcp:8080",
-  // localhost del móvil apunta al puerto 8080 del ordenador.
-  static const String urlBase = 'http://localhost:8080';
+  // Se puede cambiar al ejecutar, sin tocar el código:
+  //   flutter run --dart-define=API_URL=http://10.0.2.2:8080       (emulador Android)
+  //   flutter run --dart-define=API_URL=http://192.168.1.X:8080    (móvil por Wi-Fi, IP del PC)
+  // Sin --dart-define se usa localhost:8080, que con el móvil por USB necesita
+  // "adb reverse tcp:8080 tcp:8080" (se pierde si cambia el dispositivo o se reinicia adb).
+  static const String urlBase = String.fromEnvironment('API_URL', defaultValue: 'http://localhost:8080');
 
   // Tiempo máximo de espera de cada petición.
   static const Duration tiempoEspera = Duration(seconds: 10);
