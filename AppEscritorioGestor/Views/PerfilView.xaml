@@ -1,0 +1,81 @@
+<UserControl x:Class="AppEscritorioGestor.PerfilView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CabeceraEstilo}" Height="270">
+            <Grid MaxWidth="760" Margin="24,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="48"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="VolverInicioBoton" Grid.Column="0" Style="{StaticResource BotonIconoEstilo}" Foreground="White" Content="&#xE72B;" VerticalAlignment="Top" Margin="0,30,0,0" ToolTip="Volver al inicio" Click="VolverInicioBoton_Click"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Mi perfil" Foreground="White" FontSize="19" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <Border Background="{StaticResource AmarilloActivoPincel}" Width="80" Height="80" CornerRadius="40" Margin="0,20,0,0">
+                        <TextBlock x:Name="InicialesTextBlock" Foreground="{StaticResource AzulPincel}" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock x:Name="NombreTextBlock" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,14,0,0"/>
+                    <TextBlock x:Name="RolCabeceraTextBlock" Text="Profesor" Foreground="#B3FFFFFF" FontSize="14" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource TarjetaEstilo}" MaxWidth="760" Margin="24" VerticalAlignment="Top" Padding="8">
+            <StackPanel>
+                <Grid Margin="16,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Style="{StaticResource InsigniaIconoEstilo}" Width="36" Height="36" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Center"><Grid><Border CornerRadius="9" Background="{StaticResource InsigniaBrilloPincel}"/><TextBlock Text="&#xE731;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource SombraGlifo}"/></Grid></Border>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Departamento" Style="{StaticResource EtiquetaEstilo}" Margin="0"/>
+                        <TextBlock x:Name="DepartamentoTextBlock" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+                <Border Height="1" Background="#E0E0E0" Margin="16,0"/>
+                <Grid Margin="16,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Style="{StaticResource InsigniaIconoEstilo}" Width="36" Height="36" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Center"><Grid><Border CornerRadius="9" Background="{StaticResource InsigniaBrilloPincel}"/><TextBlock Text="&#xE7BE;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource SombraGlifo}"/></Grid></Border>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Especialidad" Style="{StaticResource EtiquetaEstilo}" Margin="0"/>
+                        <TextBlock x:Name="EspecialidadTextBlock" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+                <Border Height="1" Background="#E0E0E0" Margin="16,0"/>
+                <Grid Margin="16,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Style="{StaticResource InsigniaIconoEstilo}" Width="36" Height="36" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Center"><Grid><Border CornerRadius="9" Background="{StaticResource InsigniaBrilloPincel}"/><TextBlock Text="&#xE717;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource SombraGlifo}"/></Grid></Border>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Teléfono" Style="{StaticResource EtiquetaEstilo}" Margin="0"/>
+                        <TextBlock x:Name="TelefonoTextBlock" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+                <Border Height="1" Background="#E0E0E0" Margin="16,0"/>
+                <Grid Margin="16,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Style="{StaticResource InsigniaIconoEstilo}" Width="36" Height="36" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Center"><Grid><Border CornerRadius="9" Background="{StaticResource InsigniaBrilloPincel}"/><TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource SombraGlifo}"/></Grid></Border>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Rol" Style="{StaticResource EtiquetaEstilo}" Margin="0"/>
+                        <TextBlock x:Name="RolTextBlock" Text="Profesor" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
