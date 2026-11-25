@@ -1,0 +1,188 @@
+# Endpoints de la API
+
+Base URL: `http://localhost:8080`
+
+> **Seguridad (Sprint 3):** todos los endpoints requieren JWT excepto `POST /api/auth/login`. Envía el token como `Authorization: Bearer <token>`.
+
+## Roles
+
+| Rol | Permisos |
+|---|---|
+| `ADMIN` | Todo: lectura y escritura en todos los recursos, y resolver solicitudes. |
+| `PROFESOR` | Solo lectura (GET) de bloqueos y configuración (profesores, grupos y sesiones: 403; su perfil lo obtiene con `/api/auth/me`). En solicitudes solo ve, crea, edita y borra **las suyas**. |
+
+Un `PROFESOR` recibe `403 Forbidden` en:
+
+- Cualquier petición a `/api/profesores`, `/api/grupos-alumnado`, `/api/sesiones-horario` y `/api/consultas` (también GET).
+- POST/PUT/DELETE de `/api/bloqueos-calendario`, `/api/profesores`, `/api/grupos-alumnado` y `/api/sesiones-horario`.
+- PUT de `/api/configuracion/{clave}`.
+- PATCH `/api/moscosos-solicitudes/{id}/estado`.
+- GET/PUT/DELETE de una solicitud de otro profesor.
+- Si es suya pero ya no está `PENDIENTE`: PUT/DELETE → `409 Conflict`.
+
+Las solicitudes de un `PROFESOR` se asocian al profesor enlazado a su usuario (campo `id_profesor` de `usuarios`). Si no tiene ninguno → `409 Conflict`.
+
+---
+
+## Autenticación `/api/auth`
+
+| Método | Ruta | Descripción | Auth |
+|---|---|---|---|
+| POST | `/api/auth/login` | Obtiene un token JWT | Público |
+| GET | `/api/auth/me` | Usuario logueado y su profesor | Cualquier rol |
+
+### POST /api/auth/login — body
+```json
+{ "username": "admin", "password": "miPassword" }
+```
+
+### POST /api/auth/login — respuesta 200
+```json
+{
+  "token": "eyJhbGc...",
+  "tipo": "Bearer",
+  "expiraEnSegundos": 3600,
+  "username": "admin",
+  "rol": "ADMIN"
+}
+```
+
+Credenciales incorrectas → `401 Unauthorized` con formato `ApiError`.
+
+### GET /api/auth/me — respuesta 200 (PROFESOR)
+```json
+{
+  "username": "user",
+  "rol": "PROFESOR",
+  "profesor": {
+    "idProfesor": 1,
+    "nombre": "Raul",
+    "apellidos": "Martinez Lopez",
+    "departamento": "Tecnologia",
+    "especialidad": "Informatica",
+    "telefono": "600123456"
+  }
+}
+```
+
+Usuario sin profesor enlazado (p. ej. `admin`): `{ "username": "admin", "rol": "ADMIN", "profesor": null }`.  
+Sin token → `401 Unauthorized`.  
+Al arrancar, `DataSeeder` enlaza el usuario `user` al profesor con id 1 (lo crea con datos de prueba si no existe).
+
+---
+
+## Profesores `/api/profesores`
+
+| Método | Ruta | Descripción | Rol |
+|---|---|---|---|
+| GET | `/api/profesores` | Lista todos los profesores (id, nombre, apellidos, departamento, especialidad) | ADMIN |
+| GET | `/api/profesores/{id}` | Obtiene un profesor por id | ADMIN |
+| POST | `/api/profesores` | Crea un profesor | ADMIN |
+| PUT | `/api/profesores/{id}` | Actualiza un profesor | ADMIN |
+| DELETE | `/api/profesores/{id}` | Elimina un profesor | ADMIN |
+
+---
+
+## Grupos de alumnado `/api/grupos-alumnado`
+
+| Método | Ruta | Descripción | Rol |
+|---|---|---|---|
+| GET | `/api/grupos-alumnado` | Lista todos los grupos | ADMIN |
+| GET | `/api/grupos-alumnado/{codGrupo}` | Obtiene un grupo | ADMIN |
+| POST | `/api/grupos-alumnado` | Crea un grupo | ADMIN |
+| PUT | `/api/grupos-alumnado/{codGrupo}` | Actualiza un grupo | ADMIN |
+| DELETE | `/api/grupos-alumnado/{codGrupo}` | Elimina un grupo | ADMIN |
+
+---
+
+## Sesiones de horario `/api/sesiones-horario`
+
+| Método | Ruta | Descripción | Rol |
+|---|---|---|---|
+| GET | `/api/sesiones-horario` | Lista todas las sesiones | ADMIN |
+| GET | `/api/sesiones-horario/{id}` | Obtiene una sesión | ADMIN |
+| POST | `/api/sesiones-horario` | Crea una sesión (valida solapes) | ADMIN |
+| PUT | `/api/sesiones-horario/{id}` | Actualiza una sesión | ADMIN |
+| DELETE | `/api/sesiones-horario/{id}` | Elimina una sesión | ADMIN |
+
+**Regla 3.4:** no se permite crear/actualizar una sesión si el profesor ya tiene otra sesión solapada ese día y horario (devuelve `409 Conflict`).
+
+---
+
+## Solicitudes de moscoso `/api/moscosos-solicitudes`
+
+| Método | Ruta | Descripción | Rol |
+|---|---|---|---|
+| GET | `/api/moscosos-solicitudes` | ADMIN: todas las solicitudes. PROFESOR: solo las suyas | ADMIN, PROFESOR |
+| GET | `/api/moscosos-solicitudes/{id}` | Obtiene una solicitud | ADMIN, PROFESOR (propia) |
+| POST | `/api/moscosos-solicitudes` | Crea solicitud (estado siempre `PENDIENTE`). Un PROFESOR siempre la crea a su nombre: se ignora el profesor del cuerpo | ADMIN, PROFESOR |
+| PUT | `/api/moscosos-solicitudes/{id}` | Actualiza datos de una solicitud | ADMIN, PROFESOR (propia y `PENDIENTE`) |
+| **PATCH** | `/api/moscosos-solicitudes/{id}/estado` | Aprueba o rechaza una solicitud | **ADMIN** |
+| DELETE | `/api/moscosos-solicitudes/{id}` | Elimina una solicitud | ADMIN, PROFESOR (propia y `PENDIENTE`) |
+
+### PATCH estado — body
+
+```json
+{ "estado": "APROBADA" }
+```
+
+Valores válidos: `APROBADA`, `RECHAZADA`.  
+Solo se puede resolver una solicitud en estado `PENDIENTE`.
+
+**Regla 3.1:** fecha bloqueada en calendario → `409 Conflict`.  
+**Regla 3.2:** mismo profesor, misma fecha → `409 Conflict`.  
+**Regla 3.5:** capacidad diaria superada al aprobar → `409 Conflict`.
+
+---
+
+## Bloqueos de calendario `/api/bloqueos-calendario`
+
+| Método | Ruta | Descripción | Rol |
+|---|---|---|---|
+| GET | `/api/bloqueos-calendario` | Lista todos los bloqueos | ADMIN, PROFESOR |
+| POST | `/api/bloqueos-calendario` | Crea un bloqueo (tipo, fechaInicio, fechaFin) | ADMIN |
+| PUT | `/api/bloqueos-calendario/{id}` | Actualiza un bloqueo | ADMIN |
+| DELETE | `/api/bloqueos-calendario/{id}` | Elimina un bloqueo | ADMIN |
+
+---
+
+## Configuración `/api/configuracion`
+
+| Método | Ruta | Descripción | Rol |
+|---|---|---|---|
+| GET | `/api/configuracion` | Lista todos los parámetros | ADMIN, PROFESOR |
+| GET | `/api/configuracion/{clave}` | Obtiene un parámetro | ADMIN, PROFESOR |
+| PUT | `/api/configuracion/{clave}` | Actualiza un parámetro | ADMIN |
+
+Clave disponible: `capacidad_diaria` (valor por defecto: `5`).
+
+---
+
+## Consultas `/api/consultas`
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/api/consultas/sesiones-por-dia` | Número de sesiones agrupadas por día de la semana (solo ADMIN) |
+
+---
+
+## Respuesta de error estándar
+
+```json
+{
+  "timestamp": "2025-01-15T10:30:00",
+  "status": 409,
+  "error": "Conflict",
+  "message": "El profesor ya tiene una solicitud para la fecha 2025-03-10.",
+  "path": "/api/moscosos-solicitudes"
+}
+```
+
+| Código | Causa |
+|---|---|
+| 400 | Datos inválidos o JSON malformado |
+| 401 | No autenticado o credenciales inválidas |
+| 403 | Sin permisos para el recurso |
+| 404 | Recurso o ruta no encontrados |
+| 409 | Regla de negocio o integridad de datos |
+| 500 | Error interno (ver logs) |
