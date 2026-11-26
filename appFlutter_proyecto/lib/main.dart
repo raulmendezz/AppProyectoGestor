@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
+import 'package:app_proyecto/config/api_config.dart';
 import 'package:app_proyecto/providers/auth_provider.dart';
 import 'package:app_proyecto/providers/bloqueos_provider.dart';
 import 'package:app_proyecto/providers/solicitudes_provider.dart';
@@ -11,6 +12,8 @@ import 'package:app_proyecto/screens/screens.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Carga la URL del servidor guardada en el dispositivo (si existe).
+  await ApiConfig.init();
   // Carga los nombres de meses y días en español para intl.
   await initializeDateFormatting('es');
   // Providers globales: se pueden usar desde cualquier pantalla.
